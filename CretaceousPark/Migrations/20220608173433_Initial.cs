@@ -13,14 +13,26 @@ namespace CretaceousPark.Migrations
                 {
                     AnimalId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: true),
-                    Species = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: true),
+                    Name = table.Column<string>(type: "varchar(20) CHARACTER SET utf8mb4", maxLength: 20, nullable: false),
+                    Species = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: false),
                     Age = table.Column<int>(type: "int", nullable: false),
-                    Gender = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: true)
+                    Gender = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Animals", x => x.AnimalId);
+                });
+
+            migrationBuilder.InsertData(
+                table: "Animals",
+                columns: new[] { "AnimalId", "Age", "Gender", "Name", "Species" },
+                values: new object[,]
+                {
+                    { 1, 7, "Female", "Matilda", "Woolly Mammoth" },
+                    { 2, 10, "Female", "Rexie", "Dinosaur" },
+                    { 3, 2, "Female", "Matilda", "Dinosaur" },
+                    { 4, 4, "Male", "Pip", "Shark" },
+                    { 5, 22, "Male", "Bartholomew", "Dinosaur" }
                 });
         }
 
